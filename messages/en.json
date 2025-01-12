@@ -1,0 +1,28 @@
+{
+  "form": {
+    "title": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "idNumber": "Passport Number",
+    "birthDate": "Birth Date",
+    "email": "Email",
+    "ticketPicture": "Choose a picture",
+    "qrCode": "QR Code",
+    "pickDate": "Pick a date",
+    "selectFile": "Select a file",
+    "success": "Your form has been submitted successfully. Please keep the QR code safe and present it to the ticket officer when required."
+  },
+  "buttons": {
+    "send": "Send",
+    "clear": "Clear"
+  },
+  "validation": {
+    "firstName": "First name is required",
+    "lastName": "Last name is required",
+    "phone": "Invalid phone number",
+    "idNumber": "ID number is required",
+    "birthDate": "Birth date is required",
+    "email": "Invalid email address"
+  }
+}

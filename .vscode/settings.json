@@ -1,0 +1,6 @@
+{
+  "type": "setting",
+  "settings": {
+    "debug.javascript.skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+  }
+}

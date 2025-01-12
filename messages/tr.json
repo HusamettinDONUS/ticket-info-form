@@ -1,0 +1,28 @@
+{
+  "form": {
+    "title": "Kişisel Bilgiler",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "phone": "Telefon",
+    "idNumber": "TC Kimlik No",
+    "birthDate": "Doğum Tarihi",
+    "email": "E-posta",
+    "ticketPicture": "Resim Ekle",
+    "qrCode": "QR Kodu",
+    "pickDate": "Tarih Seç",
+    "selectFile": "Dosya Seç",
+    "success": "Formunuz başarıyla gönderildi. Lütfen QR kodunuzu saklayın ve talep edildiğinde bilet görevlisine sunun."
+  },
+  "buttons": {
+    "send": "Gönder",
+    "clear": "Temizle"
+  },
+  "validation": {
+    "firstName": "Ad girilmelidir",
+    "lastName": "Soyad girilmelidir",
+    "phone": "Geçersiz telefon numarası",
+    "idNumber": "Kimlik numarası zorunludur",
+    "birthDate": "Doğum tarihi zorunludur",
+    "email": "Geçersiz e-posta adresi"
+  }
+}
