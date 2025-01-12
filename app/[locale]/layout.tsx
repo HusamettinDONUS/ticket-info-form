@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { notFound } from "next/navigation";
 import "../globals.css";
+import enMessages from "@/messages/en.json";
+import trMessages from "@/messages/tr.json";
+import arMessages from "@/messages/ar.json";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,23 +22,19 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "tr" }];
+  return [{ locale: "en" }, { locale: "tr" }, { locale: "ar" }];
 }
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  let messages;
-
-  try {
-    messages = (await import(`@/messages/${locale}.json`)).default;
-  } catch {
-    notFound();
-  }
+  const { locale } = await params;
+  const messages =
+    locale === "tr" ? trMessages : locale === "ar" ? arMessages : enMessages;
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
