@@ -69,8 +69,8 @@ export default function Page() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-md w-96">
+      <div className="h-full bg-gray-100 flex items-center justify-center">
+        <div className="bg-white mt-8 p-8 rounded-lg shadow-md w-96">
           <LanguageSwitcher />
           <h1 className="text-2xl text-blue-500 font-bold text-center mb-4">
             {t("form.title")}
@@ -200,37 +200,36 @@ export default function Page() {
             </div>
           </form>
         </div>
-      </div>
-
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="w-fit">
-          <DialogHeader>
-            <DialogTitle className="flex justify-center items-center gap-3 text-center text-xl font-bold">
-              <span className="text-3xl">QR</span>
-              <CircleCheckBig size={32} color="green" />
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col items-center justify-center ">
-            <div
-              className="relative w-64 h-64 mb-4"
-              style={{
-                backgroundImage: `url(${imageUrl})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <QRCodeSVG
-                  value={submittedData?.idNumber || ""}
-                  size={256}
-                  bgColor="rgba(255, 255, 255, 0.1)"
-                />
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent className="w-fit">
+            <DialogHeader>
+              <DialogTitle className="flex justify-center items-center gap-3 text-center text-xl font-bold">
+                <span className="text-3xl">QR</span>
+                <CircleCheckBig size={32} color="green" />
+              </DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col items-center justify-center ">
+              <div
+                className="relative w-64 h-64 mb-4"
+                style={{
+                  backgroundImage: `url(${imageUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <QRCodeSVG
+                    value={submittedData?.idNumber || ""}
+                    size={256}
+                    bgColor="rgba(255, 255, 255, 0.1)"
+                  />
+                </div>
               </div>
+              <span className="font-thin">{t("form.success")}</span>
             </div>
-            <span className="font-thin">{t("form.success")}</span>
-          </div>
-        </DialogContent>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
+      </div>
     </>
   );
 }
