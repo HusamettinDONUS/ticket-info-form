@@ -16,10 +16,12 @@ import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Button } from "@/components/ui/button";
 import { CircleCheckBig, Send, Trash2 } from "lucide-react";
+import { FilePicker } from "@/components/ui/filepicker";
+import Image from "next/image";
+import { DatePickerField } from "@/components/ui/datepickerfield";
 
 export default function Page() {
   const t = useTranslations();
-
   const formSchema = z.object({
     firstName: z.string().min(2, t("validation.firstName")),
     lastName: z.string().min(2, t("validation.lastName")),
@@ -37,7 +39,6 @@ export default function Page() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
-
   const {
     register,
     handleSubmit,
@@ -69,8 +70,8 @@ export default function Page() {
 
   return (
     <>
-      <div className="h-full bg-gray-100 flex items-center justify-center">
-        <div className="bg-white mt-8 p-8 rounded-lg shadow-md w-96">
+      <div className="min-h-full flex items-center justify-center">
+        <div className="bg-white p-8 pt-4 rounded-lg shadow-md w-96">
           <LanguageSwitcher />
           <h1 className="text-2xl text-blue-500 font-bold text-center mb-4">
             {t("form.title")}
@@ -108,12 +109,33 @@ export default function Page() {
             </div>
 
             <div>
+              <label className="block text-sm mb-1 font-medium text-gray-700">
+                {t("form.birthDate")}
+              </label>
+              <DatePicker
+                value={watch("birthDate")}
+                onChange={(date) => {
+                  setValue("birthDate", date!, {
+                    shouldValidate: true,
+                  });
+                }}
+              />
+              {/* <DatePickerField {...register("birthDate")} /> */}
+
+              {errors.birthDate && (
+                <p className="text-red-500 text-sm">
+                  {errors.birthDate.message}
+                </p>
+              )}
+            </div>
+
+            <div>
               <label className="block text-sm font-medium text-gray-700">
                 {t("form.phone")}
               </label>
               <Input
                 {...register("phone")}
-                className="mt-1 block w-full text-gray-900 rounded-md border-gray-300 shadow-sm "
+                className="mt-1 block w-full text-gray-900 rounded-md border-gray-300 shadow-sm"
               />
               {errors.phone && (
                 <p className="text-red-500 text-sm">{errors.phone.message}</p>
@@ -137,25 +159,6 @@ export default function Page() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                {t("form.birthDate")}
-              </label>
-              <DatePicker
-                value={watch("birthDate")}
-                onChange={(date) => {
-                  setValue("birthDate", date!, {
-                    shouldValidate: true,
-                  });
-                }}
-              />
-              {errors.birthDate && (
-                <p className="text-red-500 text-sm">
-                  {errors.birthDate.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
                 {t("form.email")}
               </label>
               <Input
@@ -167,15 +170,27 @@ export default function Page() {
               )}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                {t("form.ticketPicture")}
-              </label>
-              <Input
-                type="file"
-                className="mt-1 block w-full text-gray-900 rounded-md border-gray-300 shadow-sm "
-                onChange={handleFileChange}
-              />
+            <div className="flex h-24 justify-between items-center">
+              <div className="flex flex-col">
+                <label className="block text-sm font-medium text-gray-700">
+                  {t("form.ticketPicture")}
+                </label>
+                <FilePicker
+                  type="file"
+                  className="mt-1 block w-full text-gray-900 rounded-md border-gray-300 shadow-sm"
+                  onChange={handleFileChange}
+                />
+              </div>
+              {imageUrl && (
+                <Image
+                  alt={imageUrl}
+                  src={imageUrl}
+                  width={75}
+                  height={75}
+                  objectFit="fill"
+                  className="rounded-md mx-7"
+                />
+              )}
             </div>
 
             <div className="flex justify-center items-center gap-3">
