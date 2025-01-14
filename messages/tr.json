@@ -18,11 +18,17 @@
     "clear": "Temizle"
   },
   "validation": {
-    "firstName": "Ad girilmelidir",
-    "lastName": "Soyad girilmelidir",
+    "firstNameLength": "Ad alanı zorunludur",
+    "firstName": "Geçersiz ad",
+    "lastNameLength": "Soyad alanı zorunludur",
+    "lastName": "Geçersiz soyad",
+    "phoneLength": "Telefon numarası zorunludur",
     "phone": "Geçersiz telefon numarası",
-    "idNumber": "Kimlik numarası zorunludur",
-    "birthDate": "Doğum tarihi zorunludur",
+    "idNumberLength": "TC Kimlik numarası zorunludur",
+    "idNumber": "Geçersiz TC Kimlik numarası",
+    "birthDateLength": "Doğum tarihi zorunludur",
+    "birthDate": "Geçersiz doğum tarihi",
+    "emailLength": "E-posta adresi zorunludur",
     "email": "Geçersiz e-posta adresi"
   }
 }

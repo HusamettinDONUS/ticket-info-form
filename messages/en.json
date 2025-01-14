@@ -18,11 +18,17 @@
     "clear": "Clear"
   },
   "validation": {
-    "firstName": "First name is required",
-    "lastName": "Last name is required",
+    "firstNameLength": "First name is required",
+    "firstName": "Invalid first name",
+    "lastNameLength": "Last name is required",
+    "lastName": "Invalid last name",
+    "phoneLength": "Phone number is required",
     "phone": "Invalid phone number",
-    "idNumber": "ID number is required",
-    "birthDate": "Birth date is required",
+    "idNumberLength": "ID number is required",
+    "idNumber": "Invalid ID number",
+    "birthDateLength": "Birth date is required",
+    "birthDate": "Invalid birth date",
+    "emailLength": "Email is required",
     "email": "Invalid email address"
   }
 }

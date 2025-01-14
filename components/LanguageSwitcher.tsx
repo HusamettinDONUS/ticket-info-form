@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
         <button
           key={lang}
           onClick={() => router.push(`/${lang}`)}
-          className={" rounded transition-colors duration-200 h-fit w-fit"}
+          className={"rounded h-fit w-fit"}
         >
           <Image src={`/${lang}.png`} alt={lang} width={75} height={25} />
         </button>
