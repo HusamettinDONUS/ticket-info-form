@@ -235,7 +235,7 @@ export default function Page() {
                   <QRCodeSVG
                     value={submittedData?.idNumber || ""}
                     size={256}
-                    bgColor="rgba(255, 255, 255, 0.1)"
+                    bgColor="rgba(255, 255, 255, 0.5)"
                   />
                 </div>
               </div>

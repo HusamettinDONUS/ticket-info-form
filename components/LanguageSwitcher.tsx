@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export const defaultLocale = "tr";
-export const locales = ["en", "tr", "ar"] as const;
+export const locales = ["tr", "en", "ar"] as const;
 export type Locale = (typeof locales)[number];
 
 export default function LanguageSwitcher() {
