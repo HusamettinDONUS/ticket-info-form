@@ -142,7 +142,7 @@ export default function Page() {
       };
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/customer/preRegistration/CreatePreRegistration`,
+        "http://85.111.31.42:6104/api/v1/customer/preRegistration/CreatePreRegistration",
         {
           method: "POST",
           headers: {
