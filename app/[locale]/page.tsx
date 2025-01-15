@@ -39,11 +39,11 @@ export default function Page() {
     firstName: z
       .string()
       .min(1, t("validation.firstNameLength"))
-      .regex(/^[a-zA-Z]+$/, t("validation.firstName")),
+      .regex(/^[A-Za-zğüşıöçĞÜŞİÖÇ]+$/, t("validation.firstName")),
     lastName: z
       .string()
       .min(1, t("validation.lastNameLength"))
-      .regex(/^[a-zA-Z]+$/, t("validation.lastName")),
+      .regex(/^[A-Za-zğüşıöçĞÜŞİÖÇ]+$/, t("validation.lastName")),
     phone: z
       .string()
       .min(1, t("validation.phoneLength"))
@@ -109,7 +109,6 @@ export default function Page() {
     if (file) {
       try {
         const reader = new FileReader();
-
         reader.onloadend = () => {
           setImageUrl(reader.result as string);
           form.setValue("profilePicture", reader.result as string);
@@ -127,11 +126,40 @@ export default function Page() {
   async function onSubmit(data: FormData) {
     try {
       setIsSubmitting(true);
-      console.log("Picture", data.profilePicture);
+
+      const requestBody = {
+        data: {
+          identityNumber: data.idNumber,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          dateOfBirth: new Date(
+            data.birthDate.split(".").reverse().join("-")
+          ).toISOString(),
+          phoneNumber: data.phone,
+          email: data.email,
+          photo: data.profilePicture,
+        },
+      };
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/customer/preRegistration/CreatePreRegistration`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("API request failed");
+      }
+
       setSubmittedData(data);
       setDialogOpen(true);
     } catch (error) {
-      console.error("Form gönderme hatası:", error);
+      console.error("Form submission error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -155,9 +183,19 @@ export default function Page() {
                   <FormLabel>{t("form.firstName")}</FormLabel>
                   <FormControl>
                     <Input
-                      pattern="[A-Za-z]*"
+                      pattern="[A-Za-zğüşıöçĞÜŞİÖÇ]*"
                       onKeyDown={(e) => {
-                        if (!/^[A-Za-zğüşıöçĞÜŞİÖÇ]$/.test(e.key)) {
+                        if (
+                          ![
+                            "Backspace",
+                            "Delete",
+                            "ArrowLeft",
+                            "ArrowRight",
+                            "Tab",
+                            "Enter",
+                          ].includes(e.key) &&
+                          !/^[A-Za-zğüşıöçĞÜŞİÖÇ]$/.test(e.key)
+                        ) {
                           e.preventDefault();
                         }
                       }}
@@ -177,9 +215,19 @@ export default function Page() {
                   <FormLabel>{t("form.lastName")}</FormLabel>
                   <FormControl>
                     <Input
-                      pattern="[A-Za-z]*"
+                      pattern="[A-Za-zğüşıöçĞÜŞİÖÇ]*"
                       onKeyDown={(e) => {
-                        if (!/^[A-Za-zğüşıöçĞÜŞİÖÇ]$/.test(e.key)) {
+                        if (
+                          ![
+                            "Backspace",
+                            "Delete",
+                            "ArrowLeft",
+                            "ArrowRight",
+                            "Tab",
+                            "Enter",
+                          ].includes(e.key) &&
+                          !/^[A-Za-zğüşıöçĞÜŞİÖÇ]$/.test(e.key)
+                        ) {
                           e.preventDefault();
                         }
                       }}
@@ -278,9 +326,7 @@ export default function Page() {
                 className="flex justify-center items-center w-3/5 bg-blue-500"
                 disabled={isSubmitting}
               >
-                <span>
-                  {isSubmitting ? t("buttons.sending") : t("buttons.send")}
-                </span>
+                <span>{t("buttons.send")}</span>
                 <Send className="ml-2" />
               </Button>
               <Button
